@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Portal de Servicios</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-glow: #00f2ff; /* Cian neón */
+            --secondary-glow: #ff8c00; /* Naranja */
+            --bg-dark: #050a14;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            background: radial-gradient(circle at 50% 10%, #0d1b33 0%, var(--bg-dark) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- CAMBIO PRINCIPAL AQUÍ --- */
+        h1 {
+            font-family: 'Michroma', sans-serif; /* Nueva tipografía */
+            font-size: 3.5rem; /* Un poco más grande */
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            
+            /* EFECTO NEÓN HUECO (Como en la imagen) */
+            color: transparent; /* El relleno es transparente */
+            -webkit-text-stroke: 2px var(--primary-glow); /* El borde es el color */
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.7); /* Resplandor */
+        }
+
+        p.subtitle {
+            color: #a0aab5;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover:not(.disabled) {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
+            border-color: var(--primary-glow);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-glow);
+        }
+
+        /* Títulos de las tarjetas también con la nueva fuente, pero rellenos */
+        .card h2 {
+            font-family: 'Michroma', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #fff; /* Estos sí van rellenos para que se lean bien pequeños */
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+
+        .card.disabled { opacity: 0.6; cursor: default; }
+        .card.disabled .card-icon { color: var(--secondary-glow); }
+        .card.disabled:hover { transform: none; box-shadow: none; }
+        .status-indicator.soon {
+            background: rgba(255, 140, 0, 0.1);
+            color: var(--secondary-glow);
+            border-color: var(--secondary-glow);
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .portal-grid { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="avatar-container">
+            <img src="gia-avatar.jpg" alt="Avatar GIA">
+        </div>
+        <h1>GIA</h1>
+        <p class="subtitle">Hub Central de Asistencia</p>
+    </header>
+
+    <main class="portal-grid">
+        
+        <a href="https://gia.goleman.com.co/" class="card" target="_blank">
+            <div>
+                <div class="card-icon"><i class="fa-solid fa-headset"></i></div>
+                <h2>Asistente</h2>
+                <p>Gestión de incidentes y soporte técnico automatizado con GIA.</p>
+            </div>
+            <div class="card-footer">
+                <span class="status-indicator">En Línea</span>
+            </div>
+        </a>
+
+        <a href="https://script.google.com/macros/s/AKfycbxbWcT_fo2zVLRYrAnJUuyMXBV_twz1F3UkmEdrUEhysBVX_tNZ2CT9DL2JY0gTEWYn/exec" class="card" target="_blank">
+            <div>
+                <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h2>Capacitaciones</h2>
+                <p>Accede al panel de formación y recursos educativos.</p>
+            </div>
+            <div class="card-footer">
+                <span class="status-indicator">En Línea</span>
+            </div>
+        </a>
+
+        <div class="card disabled">
+            <div>
+                <div class="card-icon"><i class="fa-regular fa-newspaper"></i></div>
+                <h2>Noticias</h2>
+                <p>Novedades, actualizaciones del sistema y comunicados oficiales.</p>
+            </div>
+            <div class="card-footer">
+                <span class="status-indicator soon">En Desarrollo</span>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Goleman. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
