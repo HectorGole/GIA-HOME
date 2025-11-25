@@ -30,6 +30,7 @@
             align-items: center;
         }
 
+        /* --- Header --- */
         header {
             text-align: center;
             padding: 40px 20px;
@@ -52,17 +53,14 @@
             object-fit: cover;
         }
 
-        /* --- CAMBIO PRINCIPAL AQUÍ --- */
         h1 {
-            font-family: 'Michroma', sans-serif; /* Nueva tipografía */
-            font-size: 3.5rem; /* Un poco más grande */
+            font-family: 'Michroma', sans-serif;
+            font-size: 3.5rem;
             letter-spacing: 2px;
             margin-bottom: 10px;
-            
-            /* EFECTO NEÓN HUECO (Como en la imagen) */
-            color: transparent; /* El relleno es transparente */
-            -webkit-text-stroke: 2px var(--primary-glow); /* El borde es el color */
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.7); /* Resplandor */
+            color: transparent;
+            -webkit-text-stroke: 2px var(--primary-glow);
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.7);
         }
 
         p.subtitle {
@@ -71,6 +69,7 @@
             margin-top: 10px;
         }
 
+        /* --- Grid de Tarjetas --- */
         .portal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -78,6 +77,7 @@
             width: 100%;
             max-width: 1000px;
             padding: 40px 20px;
+            padding-bottom: 100px; /* Espacio extra abajo para que no tapen los botones flotantes */
             flex-grow: 1;
         }
 
@@ -110,12 +110,11 @@
             color: var(--primary-glow);
         }
 
-        /* Títulos de las tarjetas también con la nueva fuente, pero rellenos */
         .card h2 {
             font-family: 'Michroma', sans-serif;
             font-size: 1.2rem;
             margin-bottom: 15px;
-            color: #fff; /* Estos sí van rellenos para que se lean bien pequeños */
+            color: #fff;
             text-shadow: 0 0 5px var(--primary-glow);
         }
 
@@ -140,11 +139,64 @@
 
         .card.disabled { opacity: 0.6; cursor: default; }
         .card.disabled .card-icon { color: var(--secondary-glow); }
-        .card.disabled:hover { transform: none; box-shadow: none; }
         .status-indicator.soon {
             background: rgba(255, 140, 0, 0.1);
             color: var(--secondary-glow);
             border-color: var(--secondary-glow);
+        }
+
+        /* --- NUEVO: Botones Flotantes de Soporte --- */
+        .support-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            align-items: flex-end; /* Alineados a la derecha */
+        }
+
+        .support-bubble {
+            background: rgba(0, 10, 20, 0.8); /* Fondo oscuro semitransparente */
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--primary-glow);
+            color: var(--primary-glow);
+            padding: 10px 20px;
+            border-radius: 50px; /* Forma de burbuja/píldora */
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'Michroma', sans-serif;
+        }
+
+        .support-bubble i {
+            font-size: 1.2rem;
+        }
+
+        .support-bubble:hover {
+            background: var(--primary-glow);
+            color: #000; /* Texto negro para contraste al pasar el mouse */
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: scale(1.05);
+        }
+
+        /* Variante naranja para Panacea */
+        .support-bubble.panacea {
+            border-color: var(--secondary-glow);
+            color: var(--secondary-glow);
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+        }
+
+        .support-bubble.panacea:hover {
+            background: var(--secondary-glow);
+            color: #000;
+            box-shadow: 0 0 20px var(--secondary-glow);
         }
 
         footer {
@@ -162,7 +214,15 @@
 
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; }
-            .portal-grid { gap: 20px; }
+            .support-container {
+                bottom: 15px;
+                right: 15px;
+                left: 15px; /* En celular, ocupan el ancho */
+            }
+            .support-bubble {
+                justify-content: center; /* Centrar texto en celular */
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -213,8 +273,18 @@
 
     </main>
 
+    <div class="support-container">
+        <a href="https://wa.me/573160186467" class="support-bubble" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Soporte 360
+        </a>
+        
+        <a href="https://wa.me/573104258509" class="support-bubble panacea" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Soporte Panacea
+        </a>
+    </div>
+
     <footer>
-        <p>&copy; 2024 Goleman. Todos los derechos reservados.</p>
+        <p>By: Ing Hector & Ing Pablo</p>
     </footer>
 
 </body>
